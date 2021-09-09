@@ -18,6 +18,7 @@ blitz-log.log
 
 # misc
 .DS_Store
+.vscode
 
 # local env files
 .env.local
@@ -34,20 +35,8 @@ pids
 *.seed
 *.pid.lock
 
-# Testing
-.coverage
-*.lcov
-.nyc_output
-lib-cov
-
 # Caches
 *.tsbuildinfo
 .eslintcache
 .node_repl_history
 .yarn-integrity
-
-# Serverless directories
-.serverless/
-
-# Stores VSCode versions used for testing VSCode extensions
-.vscode-test
