@@ -1,5 +1,5 @@
 {
-   "name": "blitz",
+   "name": "nova-form",
    "version": "0.1.0",
    "private": true,
    "scripts": {
@@ -12,8 +12,8 @@
       "seed": "blitz db seed",
       "lint": "eslint --ignore-path .gitignore --ext .js,.ts,.tsx .",
       "prepare": "husky install",
-      "release": "standard-version -s -n",
-      "release:beta": "standard-version -s -n --prerelease beta"
+      "release": "standard-version -n",
+      "release:beta": "standard-version -n --prerelease beta"
    },
    "prisma": {
       "schema": "db/schema.prisma"
