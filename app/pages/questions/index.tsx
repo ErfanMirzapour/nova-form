@@ -7,8 +7,9 @@ import {
    BlitzPage,
    Routes,
 } from 'blitz';
-import Layout from 'app/core/layouts/Layout';
-import getQuestions from 'app/questions/queries/getQuestions';
+
+import Layout from '~core/layouts/Layout';
+import getQuestions from '~questions/queries/getQuestions';
 
 const ITEMS_PER_PAGE = 10;
 // this is some comments

@@ -1,5 +1,6 @@
 import { paginate, resolver } from 'blitz';
-import db, { Prisma } from 'db';
+
+import db, { Prisma } from '~db';
 
 interface GetQuestionsInput
    extends Pick<

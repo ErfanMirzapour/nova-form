@@ -3,6 +3,14 @@
       "target": "es5",
       "lib": ["dom", "dom.iterable", "esnext"],
       "baseUrl": "./",
+      "paths": {
+         "~/*": ["./*"],
+         "~db": ["db"],
+         "~auth/*": ["app/auth/*"],
+         "~core/*": ["app/core/*"],
+         "~users/*": ["app/users/*"],
+         "~questions/*": ["app/questions/*"]
+      },
       "allowJs": true,
       "skipLibCheck": true,
       "strict": false,

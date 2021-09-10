@@ -1,6 +1,7 @@
 import { resolver } from 'blitz';
-import db from 'db';
 import { z } from 'zod';
+
+import db from '~db';
 
 const UpdateChoice = z.object({
    id: z.number(),

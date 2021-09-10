@@ -1,6 +1,7 @@
 import { resolver, NotFoundError } from 'blitz';
-import db from 'db';
 import { z } from 'zod';
+
+import db from '~db';
 
 const GetQuestion = z.object({
    // This accepts type of undefined, but is required at runtime

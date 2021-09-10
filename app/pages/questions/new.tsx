@@ -1,10 +1,8 @@
 import { Link, useRouter, useMutation, BlitzPage, Routes } from 'blitz';
-import Layout from 'app/core/layouts/Layout';
-import createQuestion from 'app/questions/mutations/createQuestion';
-import {
-   QuestionForm,
-   FORM_ERROR,
-} from 'app/questions/components/QuestionForm';
+
+import Layout from '~core/layouts/Layout';
+import createQuestion from '~questions/mutations/createQuestion';
+import { QuestionForm, FORM_ERROR } from '~questions/components/QuestionForm';
 
 const NewQuestionPage: BlitzPage = () => {
    const router = useRouter();
