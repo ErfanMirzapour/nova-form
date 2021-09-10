@@ -4,8 +4,9 @@
    "private": true,
    "scripts": {
       "dev": "blitz dev",
-      "build": "blitz build",
-      "start": "yarn build && blitz start",
+      "build": "cross-env NODE_ENV=production blitz build && blitz prisma migrate deploy",
+      "build:dev": "blitz build",
+      "start": "blitz start",
       "studio": "blitz prisma studio",
       "migrate": "blitz prisma migrate dev",
       "console": "blitz console",
@@ -39,6 +40,7 @@
    },
    "devDependencies": {
       "@types/react": "17.0.20",
+      "cross-env": "7.0.3",
       "eslint": "7.32.0",
       "faker": "5.5.3",
       "husky": "6.0.0",
