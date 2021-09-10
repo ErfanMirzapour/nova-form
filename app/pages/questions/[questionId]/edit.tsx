@@ -10,10 +10,9 @@ import {
    Routes,
 } from 'blitz';
 
-import Layout from '~core/layouts/Layout';
-import getQuestion from '~questions/queries/getQuestion';
-import updateQuestion from '~questions/mutations/updateQuestion';
-import { QuestionForm, FORM_ERROR } from '~questions/components/QuestionForm';
+import { Layout, FORM_ERROR } from '~core/components';
+import { getQuestion, updateQuestion } from '~questions/resolvers';
+import { QuestionForm } from '~questions/components';
 
 export const EditQuestion = () => {
    const router = useRouter();

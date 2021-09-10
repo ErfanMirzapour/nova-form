@@ -1,10 +1,9 @@
 import { BlitzPage, useRouterQuery, Link, useMutation, Routes } from 'blitz';
 
-import Layout from '~core/layouts/Layout';
-import { LabeledTextField } from '~core/components/LabeledTextField';
-import { Form, FORM_ERROR } from '~core/components/Form';
-import { ResetPassword } from '~auth/validations';
-import resetPassword from '~auth/mutations/resetPassword';
+import { Layout, LabeledTextField, Form, FORM_ERROR } from '~core/components';
+
+import { ResetPassword } from '../validations';
+import { resetPassword } from '../resolvers';
 
 const ResetPasswordPage: BlitzPage = () => {
    const query = useRouterQuery();

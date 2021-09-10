@@ -8,20 +8,7 @@ import {
    useQueryErrorResetBoundary,
 } from 'blitz';
 
-import LoginForm from '~auth/components/LoginForm';
-
-export default function App({ Component, pageProps }: AppProps) {
-   const getLayout = Component.getLayout || (page => page);
-
-   return (
-      <ErrorBoundary
-         FallbackComponent={RootErrorFallback}
-         onReset={useQueryErrorResetBoundary().reset}
-      >
-         {getLayout(<Component {...pageProps} />)}
-      </ErrorBoundary>
-   );
-}
+import { LoginForm } from '~auth/components';
 
 function RootErrorFallback({ error, resetErrorBoundary }: ErrorFallbackProps) {
    if (error instanceof AuthenticationError) {
@@ -42,3 +29,18 @@ function RootErrorFallback({ error, resetErrorBoundary }: ErrorFallbackProps) {
       );
    }
 }
+
+const App = ({ Component, pageProps }: AppProps) => {
+   const getLayout = Component.getLayout || (page => page);
+
+   return (
+      <ErrorBoundary
+         FallbackComponent={RootErrorFallback}
+         onReset={useQueryErrorResetBoundary().reset}
+      >
+         {getLayout(<Component {...pageProps} />)}
+      </ErrorBoundary>
+   );
+};
+
+export default App;

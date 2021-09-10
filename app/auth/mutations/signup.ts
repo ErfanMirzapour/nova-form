@@ -1,8 +1,9 @@
 import { resolver, SecurePassword } from 'blitz';
 
 import db from '~db';
-import { Signup } from '~auth/validations';
 import { Role } from '~/types';
+
+import { Signup } from '../validations';
 
 export default resolver.pipe(
    resolver.zod(Signup),

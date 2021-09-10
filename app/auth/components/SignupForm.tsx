@@ -1,15 +1,14 @@
 import { useMutation } from 'blitz';
 
-import { LabeledTextField } from '~core/components/LabeledTextField';
-import { Form, FORM_ERROR } from '~core/components/Form';
-import signup from '~auth/mutations/signup';
+import { LabeledTextField, Form, FORM_ERROR } from '~core/components';
+import { signup } from '~auth/resolvers';
 import { Signup } from '~auth/validations';
 
 type SignupFormProps = {
    onSuccess?: () => void;
 };
 
-export const SignupForm = (props: SignupFormProps) => {
+const SignupForm = (props: SignupFormProps) => {
    const [signupMutation] = useMutation(signup);
 
    return (

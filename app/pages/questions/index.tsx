@@ -8,8 +8,8 @@ import {
    Routes,
 } from 'blitz';
 
-import Layout from '~core/layouts/Layout';
-import getQuestions from '~questions/queries/getQuestions';
+import { Layout } from '~core/components';
+import { getQuestions } from '~questions/resolvers';
 
 const ITEMS_PER_PAGE = 10;
 // this is some comments

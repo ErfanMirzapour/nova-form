@@ -1,15 +1,14 @@
 import { AuthenticationError, Link, useMutation, Routes } from 'blitz';
 
-import { LabeledTextField } from '~core/components/LabeledTextField';
-import { Form, FORM_ERROR } from '~core/components/Form';
-import login from '~auth/mutations/login';
+import { LabeledTextField, Form, FORM_ERROR } from '~core/components';
+import { login } from '~auth/resolvers';
 import { Login } from '~auth/validations';
 
 type LoginFormProps = {
    onSuccess?: () => void;
 };
 
-export const LoginForm = (props: LoginFormProps) => {
+const LoginForm = (props: LoginFormProps) => {
    const [loginMutation] = useMutation(login);
 
    return (

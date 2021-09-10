@@ -10,9 +10,8 @@ import {
    Routes,
 } from 'blitz';
 
-import Layout from '~core/layouts/Layout';
-import getQuestion from '~questions/queries/getQuestion';
-import deleteQuestion from '~questions/mutations/deleteQuestion';
+import { Layout } from '~core/components';
+import { getQuestion, deleteQuestion } from '~questions/resolvers';
 
 export const Question = () => {
    const router = useRouter();

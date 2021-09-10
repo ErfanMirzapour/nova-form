@@ -1,7 +1,6 @@
 import { useState, ReactNode, PropsWithoutRef } from 'react';
 import { FormProvider, useForm, UseFormProps } from 'react-hook-form';
 import { z } from 'zod';
-
 import { zodResolver } from '@hookform/resolvers/zod';
 
 export interface FormProps<S extends z.ZodType<any, any>>
@@ -22,14 +21,14 @@ interface OnSubmitResult {
 
 export const FORM_ERROR = 'FORM_ERROR';
 
-export function Form<S extends z.ZodType<any, any>>({
+const Form = <S extends z.ZodType<any, any>>({
    children,
    submitText,
    schema,
    initialValues,
    onSubmit,
    ...props
-}: FormProps<S>) {
+}: FormProps<S>) => {
    const ctx = useForm<z.infer<S>>({
       mode: 'onBlur',
       resolver: schema ? zodResolver(schema) : undefined,
@@ -79,6 +78,6 @@ export function Form<S extends z.ZodType<any, any>>({
          </form>
       </FormProvider>
    );
-}
+};
 
 export default Form;

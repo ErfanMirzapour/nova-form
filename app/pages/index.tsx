@@ -1,9 +1,9 @@
 import { Suspense } from 'react';
 import { Image, Link, BlitzPage, useMutation, Routes } from 'blitz';
 
-import Layout from '~core/layouts/Layout';
-import { useCurrentUser } from '~core/hooks/useCurrentUser';
-import logout from '~auth/mutations/logout';
+import { Layout } from '~core/components';
+import { useCurrentUser } from '~core/hooks';
+import { logout } from '~auth/resolvers';
 import logo from '~/public/logo.png';
 
 /*
