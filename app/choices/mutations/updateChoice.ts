@@ -4,7 +4,7 @@ import { z } from 'zod';
 import db from '~db';
 
 const UpdateChoice = z.object({
-   id: z.number(),
+   id: z.string(),
    text: z.string(),
    votes: z.number(),
 });

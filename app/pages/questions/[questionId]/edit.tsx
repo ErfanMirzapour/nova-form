@@ -16,7 +16,7 @@ import { QuestionForm } from '~questions/components';
 
 export const EditQuestion = () => {
    const router = useRouter();
-   const questionId = useParam('questionId', 'number');
+   const questionId = useParam('questionId', 'string');
    const [question, { setQueryData }] = useQuery(
       getQuestion,
       { id: questionId },

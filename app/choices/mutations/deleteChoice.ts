@@ -4,7 +4,7 @@ import { z } from 'zod';
 import db from '~db';
 
 const DeleteChoice = z.object({
-   id: z.number(),
+   id: z.string(),
 });
 
 export default resolver.pipe(

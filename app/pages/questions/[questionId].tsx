@@ -15,7 +15,7 @@ import { getQuestion, deleteQuestion } from '~questions/resolvers';
 
 export const Question = () => {
    const router = useRouter();
-   const questionId = useParam('questionId', 'number');
+   const questionId = useParam('questionId', 'string');
    const [deleteQuestionMutation] = useMutation(deleteQuestion);
    const [question] = useQuery(getQuestion, { id: questionId });
 
