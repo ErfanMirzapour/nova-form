@@ -8,8 +8,7 @@
          "~db": ["db"],
          "~auth/*": ["app/auth/*"],
          "~core/*": ["app/core/*"],
-         "~users/*": ["app/users/*"],
-         "~questions/*": ["app/questions/*"]
+         "~users/*": ["app/users/*"]
       },
       "allowJs": true,
       "skipLibCheck": true,

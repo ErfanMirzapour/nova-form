@@ -36,23 +36,3 @@ model Session {
   userId String? @db.Char(25)
   user   User?   @relation(fields: [userId], references: [id])
 }
-
-model Question {
-  id        String   @id @default(cuid()) @db.Char(25)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  text      String
-
-  choices Choice[]
-}
-
-model Choice {
-  id        String   @id @default(cuid()) @db.Char(25)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  text      String
-  votes     Int      @default(0)
-
-  questionId String   @db.Char(25)
-  question   Question @relation(fields: [questionId], references: [id])
-}
