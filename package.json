@@ -8,12 +8,12 @@
       "start": "blitz start",
       "build:dev": "blitz build",
       "prod": "yarn build:dev && yarn start -p 5000",
-      "push": "blitz prisma db push",
       "migrate": "blitz prisma migrate dev",
+      "postmigrate": "yarn seed",
       "migrate:prod": "blitz prisma migrate deploy",
       "studio": "blitz prisma studio",
       "console": "blitz console",
-      "seed": "blitz db seed",
+      "seed": "blitz prisma migrate reset --force && blitz db seed",
       "type": "tsc",
       "lint": "eslint --ignore-path .gitignore --ext .ts,.tsx .",
       "prepare": "husky install",
@@ -42,6 +42,7 @@
       "zod": "3.8.2"
    },
    "devDependencies": {
+      "@types/faker": "5.5.8",
       "@types/react": "17.0.20",
       "cross-env": "7.0.3",
       "eslint": "7.32.0",
