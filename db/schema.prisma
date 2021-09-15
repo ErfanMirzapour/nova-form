@@ -36,13 +36,16 @@ model User {
 
   sessions    Session[]
   filledForms FormResult[]
+  forms       Form[]
 }
 
 model Form {
   id    String @id @default(cuid()) @db.Char(25)
   title String @db.VarChar(100)
 
-  fielsSets FieldSet[]
+  ownerId   String       @db.Char(25)
+  owner     User         @relation(fields: [ownerId], references: [id])
+  fieldSets FieldSet[]
   results   FormResult[]
 }
 
