@@ -7,21 +7,6 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model User {
-  id             String  @id @default(cuid()) @db.Char(25)
-  email          String  @unique
-  hashedPassword String
-  fullName       String? @db.Char(50)
-  role           Role    @default(USER)
-
-  sessions Session[]
-}
-
-enum Role {
-  ADMIN
-  USER
-}
-
 model Session {
   id                 String    @id @default(cuid())
   createdAt          DateTime  @default(now())
@@ -35,4 +20,87 @@ model Session {
 
   userId String? @db.Char(25)
   user   User?   @relation(fields: [userId], references: [id])
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+model User {
+  id             String  @id @default(cuid()) @db.Char(25)
+  email          String  @unique
+  hashedPassword String
+  fullName       String? @db.Char(50)
+  role           Role    @default(USER)
+
+  sessions    Session[]
+  filledForms FormResult[]
+}
+
+model Form {
+  id    String @id @default(cuid()) @db.Char(25)
+  title String @db.VarChar(100)
+
+  fielsSets FieldSet[]
+  results   FormResult[]
+}
+
+model FormResult {
+  id     String @id @default(cuid()) @db.Char(25)
+  result Json
+
+  formId      String @db.Char(25)
+  form        Form   @relation(fields: [formId], references: [id])
+  submitterId String @db.Char(25)
+  submitter   User   @relation(fields: [submitterId], references: [id])
+}
+
+model FieldSet {
+  id     String @id @default(cuid()) @db.Char(25)
+  legend String @db.VarChar(100)
+
+  formId String        @db.Char(25)
+  form   Form          @relation(fields: [formId], references: [id])
+  inputs CustomInput[]
+}
+
+model CustomInput {
+  id           String       @id @default(cuid()) @db.Char(25)
+  type         InputType    @default(TEXT)
+  label        String       @db.VarChar(50)
+  placeholder  String?      @db.VarChar(100)
+  defaultValue String?
+  wide         Boolean      @default(true)
+  options      String[]
+  validations  Validation[]
+
+  fieldSetId String   @db.Char(25)
+  fieldSet   FieldSet @relation(fields: [fieldSetId], references: [id])
+}
+
+model Input {
+  type        InputType    @id @default(TEXT)
+  title       String       @db.VarChar(50)
+  hasOptions  Boolean      @default(false)
+  validations Validation[]
+}
+
+enum InputType {
+  TEXT
+  PASSWORD
+  EMAIL
+  URL
+  NUMBER
+  SELECT
+  CHECKBOX
+  RADIO
+  TEXTAREA
+  SWITCH
+}
+
+enum Validation {
+  MANDATORY
+  LENGTH
+  RANGE
 }
