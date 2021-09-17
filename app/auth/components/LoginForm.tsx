@@ -18,7 +18,7 @@ const LoginForm = (props: LoginFormProps) => {
          <Form
             submitText='Login'
             schema={Login}
-            initialValues={{ email: '', password: '' }}
+            initialValues={{ username: '', password: '' }}
             onSubmit={async values => {
                try {
                   await loginMutation(values);
@@ -38,7 +38,11 @@ const LoginForm = (props: LoginFormProps) => {
                }
             }}
          >
-            <LabeledTextField name='email' label='Email' placeholder='Email' />
+            <LabeledTextField
+               name='username'
+               label='نام کاربری'
+               placeholder='نام کاربری'
+            />
             <LabeledTextField
                name='password'
                label='Password'

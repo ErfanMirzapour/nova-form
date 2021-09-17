@@ -29,7 +29,7 @@ enum Role {
 
 model User {
   id             String  @id @default(cuid()) @db.Char(25)
-  email          String  @unique
+  username       String  @unique @db.VarChar(50)
   hashedPassword String
   fullName       String? @db.Char(50)
   role           Role    @default(USER)

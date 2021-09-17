@@ -1,18 +1,15 @@
 import { z } from 'zod';
 
-const password = z.string();
+const password = z.string().min(6);
 
 export const Signup = z.object({
-   email: z.string().email(),
+   username: z.string().min(1).max(50),
    password,
 });
 
-export const Login = z.object({
-   email: z.string().email(),
-   password: z.string(),
-});
+export const Login = Signup;
 
 export const ChangePassword = z.object({
-   currentPassword: z.string(),
+   currentPassword: password,
    newPassword: password,
 });

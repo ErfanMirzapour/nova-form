@@ -14,7 +14,7 @@ export default resolver.pipe(
       });
       if (!user) throw new NotFoundError();
 
-      await authenticateUser(user.email, currentPassword);
+      await authenticateUser(user.username, currentPassword);
 
       const hashedPassword = await SecurePassword.hash(newPassword.trim());
       await db.user.update({

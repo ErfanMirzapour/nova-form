@@ -7,7 +7,7 @@ const hashedPassword =
    'JGFyZ29uMmlkJHY9MTkkbT02NTUzNix0PTIscD0xJHd0QVlZZjgxa2tMeWFhTmo0eGxUNGckN01mZ21PSnBpL09RZ1lOcFdUU2pOSEJBQk51ZzhtVGJnblZnOGVyYUc5TQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=';
 
 const users: Prisma.UserCreateInput[] = Array.from(Array(5), () => ({
-   email: internet.email(),
+   username: internet.userName(),
    fullName: `${name.firstName()} ${name.firstName()}`,
    hashedPassword,
 }));
@@ -45,13 +45,13 @@ const seed = async () => {
    await db.user.createMany({
       data: [
          {
-            email: 'erfanmirzapour1@gmail.com',
+            username: 'erfanmirzapour',
             fullName: 'Erfan Mirzapour',
             hashedPassword,
             role: 'ADMIN',
          },
          {
-            email: 'test@user.com',
+            username: 'test',
             fullName: 'Test User',
             hashedPassword,
             role: 'USER',
@@ -67,7 +67,7 @@ const seed = async () => {
          title: 'فرم اول',
          owner: {
             connect: {
-               email: 'erfanmirzapour1@gmail.com',
+               username: 'erfanmirzapour',
             },
          },
          fieldSets: {
@@ -84,7 +84,7 @@ const seed = async () => {
             create: {
                submitter: {
                   connect: {
-                     email: 'test@user.com',
+                     username: 'test',
                   },
                },
                result: formResult,
