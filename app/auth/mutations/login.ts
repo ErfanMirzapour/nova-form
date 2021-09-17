@@ -9,7 +9,7 @@ export const authenticateUser = async (
    rawUsername: string,
    rawPassword: string
 ) => {
-   const username = rawUsername.toLowerCase().trim();
+   const username = rawUsername.toLowerCase();
    const password = rawPassword.trim();
    const user = await db.user.findFirst({ where: { username } });
    if (!user) throw new AuthenticationError();

@@ -39,6 +39,7 @@
       "react": "alpha",
       "react-dom": "alpha",
       "react-hook-form": "7.15.0",
+      "string-sanitizer": "2.0.2",
       "zod": "3.8.2"
    },
    "devDependencies": {

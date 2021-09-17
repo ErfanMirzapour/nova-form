@@ -11,7 +11,7 @@ export default resolver.pipe(
       const hashedPassword = await SecurePassword.hash(password.trim());
       const user = await db.user.create({
          data: {
-            username: username.toLowerCase().trim(),
+            username: username.toLowerCase(),
             hashedPassword,
             role: 'USER',
          },

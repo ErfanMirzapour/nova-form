@@ -17,3 +17,9 @@ declare module 'blitz' {
       };
    }
 }
+
+declare module 'string-sanitizer' {
+   export const validate: {
+      isUsername(username: string): boolean;
+   };
+}
