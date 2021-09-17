@@ -15,7 +15,7 @@ class MyDocument extends Document {
 
    render() {
       return (
-         <Html lang='en'>
+         <Html lang='fa-IR' dir='rtl'>
             <DocumentHead />
             <body>
                <Main />

@@ -1,3 +1,4 @@
+import { ChakraProvider } from '@chakra-ui/react';
 import {
    AppProps,
    ErrorBoundary,
@@ -9,6 +10,8 @@ import {
 } from 'blitz';
 
 import { LoginForm } from '~auth/components';
+
+import theme from '../theme';
 
 function RootErrorFallback({ error, resetErrorBoundary }: ErrorFallbackProps) {
    if (error instanceof AuthenticationError) {
@@ -34,12 +37,14 @@ const App = ({ Component, pageProps }: AppProps) => {
    const getLayout = Component.getLayout || (page => page);
 
    return (
-      <ErrorBoundary
-         FallbackComponent={RootErrorFallback}
-         onReset={useQueryErrorResetBoundary().reset}
-      >
-         {getLayout(<Component {...pageProps} />)}
-      </ErrorBoundary>
+      <ChakraProvider theme={theme}>
+         <ErrorBoundary
+            FallbackComponent={RootErrorFallback}
+            onReset={useQueryErrorResetBoundary().reset}
+         >
+            {getLayout(<Component {...pageProps} />)}
+         </ErrorBoundary>
+      </ChakraProvider>
    );
 };
 
