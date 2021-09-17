@@ -11,6 +11,7 @@ import {
 
 import { LoginForm } from '~auth/components';
 
+import { Fonts } from '../components';
 import theme from '../theme';
 
 function RootErrorFallback({ error, resetErrorBoundary }: ErrorFallbackProps) {
@@ -38,6 +39,7 @@ const App = ({ Component, pageProps }: AppProps) => {
 
    return (
       <ChakraProvider theme={theme}>
+         <Fonts />
          <ErrorBoundary
             FallbackComponent={RootErrorFallback}
             onReset={useQueryErrorResetBoundary().reset}
