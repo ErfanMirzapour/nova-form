@@ -7,6 +7,10 @@ export const Signup = z.object({
    password,
 });
 
+export const SignupForm = Signup.extend({
+   passwordConfirm: password,
+});
+
 export const Login = Signup;
 
 export const ChangePassword = z.object({

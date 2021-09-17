@@ -2,7 +2,7 @@ import { useMutation } from 'blitz';
 
 import { LabeledTextField, Form, FORM_ERROR } from '~core/components';
 import { signup } from '~auth/resolvers';
-import { Signup } from '~auth/validations';
+import { SignupForm as SignupFormSchema } from '~auth/validations';
 
 type SignupFormProps = {
    onSuccess?: () => void;
@@ -17,9 +17,12 @@ const SignupForm = (props: SignupFormProps) => {
 
          <Form
             submitText='Create Account'
-            schema={Signup}
-            initialValues={{ username: '', password: '' }}
-            onSubmit={async values => {
+            schema={SignupFormSchema}
+            initialValues={{ username: '', password: '', passwordConfirm: '' }}
+            onSubmit={async ({ passwordConfirm, ...values }) => {
+               if (values.password !== passwordConfirm)
+                  return { passwordConfirm: 'رمزهای عبور همخوانی ندارند!' };
+
                try {
                   await signupMutation(values);
                   props.onSuccess?.();
@@ -45,6 +48,12 @@ const SignupForm = (props: SignupFormProps) => {
                name='password'
                label='Password'
                placeholder='Password'
+               type='password'
+            />
+            <LabeledTextField
+               name='passwordConfirm'
+               label='تکرار رمز عبور'
+               placeholder='تکرار رمز عبور'
                type='password'
             />
          </Form>
