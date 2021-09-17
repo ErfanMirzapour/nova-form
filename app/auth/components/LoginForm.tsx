@@ -3,6 +3,7 @@ import { AuthenticationError, Link, useMutation, Routes } from 'blitz';
 import { LabeledTextField, Form, FORM_ERROR } from '~core/components';
 import { login } from '~auth/resolvers';
 import { Login } from '~auth/validations';
+import errors from '../errors';
 
 type LoginFormProps = {
    onSuccess?: () => void;
@@ -26,13 +27,11 @@ const LoginForm = (props: LoginFormProps) => {
                } catch (error) {
                   if (error instanceof AuthenticationError) {
                      return {
-                        [FORM_ERROR]: 'Sorry, those credentials are invalid',
+                        [FORM_ERROR]: errors.invalidCredentials,
                      };
                   } else {
                      return {
-                        [FORM_ERROR]:
-                           'Sorry, we had an unexpected error. Please try again. - ' +
-                           error.toString(),
+                        [FORM_ERROR]: error.toString(),
                      };
                   }
                }
