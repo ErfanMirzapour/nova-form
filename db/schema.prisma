@@ -28,11 +28,12 @@ enum Role {
 }
 
 model User {
-  id             String  @id @default(cuid()) @db.Char(25)
-  username       String  @unique @db.VarChar(50)
+  id             String   @id @default(cuid()) @db.Char(25)
+  createdAt      DateTime @default(now())
+  username       String   @unique @db.VarChar(50)
   hashedPassword String
-  fullName       String? @db.Char(50)
-  role           Role    @default(USER)
+  fullName       String?  @db.Char(50)
+  role           Role     @default(USER)
 
   sessions    Session[]
   filledForms FormResult[]
@@ -40,8 +41,10 @@ model User {
 }
 
 model Form {
-  id    String @id @default(cuid()) @db.Char(25)
-  title String @db.VarChar(100)
+  id        String   @id @default(cuid()) @db.Char(25)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  title     String   @db.VarChar(100)
 
   ownerId   String       @db.Char(25)
   owner     User         @relation(fields: [ownerId], references: [id])
@@ -50,8 +53,9 @@ model Form {
 }
 
 model FormResult {
-  id     String @id @default(cuid()) @db.Char(25)
-  result Json
+  id        String   @id @default(cuid()) @db.Char(25)
+  createdAt DateTime @default(now())
+  result    Json
 
   formId      String @db.Char(25)
   form        Form   @relation(fields: [formId], references: [id])
