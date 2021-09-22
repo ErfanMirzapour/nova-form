@@ -65,6 +65,8 @@ const seed = async () => {
    await db.form.create({
       data: {
          title: 'فرم اول',
+         description: 'توضیحات فرم',
+         submitMessage: 'با تشکر از شما',
          owner: {
             connect: {
                username: 'erfanmirzapour',

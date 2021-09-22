@@ -40,18 +40,6 @@ model User {
   forms       Form[]
 }
 
-model Form {
-  id        String   @id @default(cuid()) @db.Char(25)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title     String   @db.VarChar(100)
-
-  ownerId   String       @db.Char(25)
-  owner     User         @relation(fields: [ownerId], references: [id])
-  fieldSets FieldSet[]
-  results   FormResult[]
-}
-
 model FormResult {
   id        String   @id @default(cuid()) @db.Char(25)
   createdAt DateTime @default(now())
@@ -61,6 +49,20 @@ model FormResult {
   form        Form   @relation(fields: [formId], references: [id])
   submitterId String @db.Char(25)
   submitter   User   @relation(fields: [submitterId], references: [id])
+}
+
+model Form {
+  id            String   @id @default(cuid()) @db.Char(25)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  title         String   @db.VarChar(100)
+  description   String?
+  submitMessage String?
+
+  ownerId   String       @db.Char(25)
+  owner     User         @relation(fields: [ownerId], references: [id])
+  fieldSets FieldSet[]
+  results   FormResult[]
 }
 
 model FieldSet {
