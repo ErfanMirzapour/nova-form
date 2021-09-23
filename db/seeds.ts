@@ -11,7 +11,7 @@ const users: Prisma.UserCreateInput[] = Array.from(Array(5), () => ({
    fullName: `${name.firstName()} ${name.firstName()}`,
    hashedPassword,
 }));
-const customInputs: Omit<Prisma.CustomInputCreateInput, 'fieldSet'>[] = [
+const customInputs: Prisma.CustomInputCreateManyFormInput[] = [
    {
       label: 'نام',
       placeholder: 'نام خود را وارد کنید',
@@ -72,14 +72,19 @@ const seed = async () => {
                username: 'erfanmirzapour',
             },
          },
-         fieldSets: {
-            create: {
-               legend: 'مشخصات اولیه',
-               inputs: {
-                  createMany: {
-                     data: customInputs,
-                  },
-               },
+         // fieldSets: {
+         //    create: {
+         //       legend: 'مشخصات اولیه',
+         //       inputs: {
+         //          createMany: {
+         //             data: customInputs,
+         //          },
+         //       },
+         //    },
+         // },
+         inputs: {
+            createMany: {
+               data: customInputs,
             },
          },
          results: {

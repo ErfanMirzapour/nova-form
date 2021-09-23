@@ -59,20 +59,21 @@ model Form {
   description   String?
   submitMessage String?
 
-  ownerId   String       @db.Char(25)
-  owner     User         @relation(fields: [ownerId], references: [id])
-  fieldSets FieldSet[]
-  results   FormResult[]
+  ownerId String        @db.Char(25)
+  owner   User          @relation(fields: [ownerId], references: [id])
+  inputs  CustomInput[]
+  results FormResult[]
+  //   fieldSets FieldSet[]
 }
 
-model FieldSet {
-  id     String @id @default(cuid()) @db.Char(25)
-  legend String @db.VarChar(100)
+// model FieldSet {
+//   id     String @id @default(cuid()) @db.Char(25)
+//   legend String @db.VarChar(100)
 
-  formId String        @db.Char(25)
-  form   Form          @relation(fields: [formId], references: [id])
-  inputs CustomInput[]
-}
+//   formId String        @db.Char(25)
+//   form   Form          @relation(fields: [formId], references: [id])
+//   inputs CustomInput[]
+// }
 
 model CustomInput {
   id           String       @id @default(cuid()) @db.Char(25)
@@ -84,8 +85,10 @@ model CustomInput {
   options      String[]
   validations  Validation[]
 
-  fieldSetId String   @db.Char(25)
-  fieldSet   FieldSet @relation(fields: [fieldSetId], references: [id])
+  formId String @db.Char(25)
+  form   Form   @relation(fields: [formId], references: [id])
+  //   fieldSetId String   @db.Char(25)
+  //   fieldSet   FieldSet @relation(fields: [fieldSetId], references: [id])
 }
 
 model Input {
