@@ -3,7 +3,7 @@ import { resolver, SecurePassword, AuthenticationError } from 'blitz';
 import db from '~db';
 import { Role } from '~/types';
 
-import { Login } from '../validations';
+import { loginSchema } from '../validations';
 
 export const authenticateUser = async (
    rawUsername: string,
@@ -30,7 +30,7 @@ export const authenticateUser = async (
 };
 
 export default resolver.pipe(
-   resolver.zod(Login),
+   resolver.zod(loginSchema),
    async ({ username, password }, ctx) => {
       // This throws an error if credentials are invalid
       const user = await authenticateUser(username, password);

@@ -4,7 +4,7 @@ import errors from '~core/errors';
 
 const maxHundredError = errors.max(100);
 
-export const FormInputSchema = z.object({
+const formInputSchema = z.object({
    id: z.string().optional(),
    type: z.enum([
       'TEXT',
@@ -26,10 +26,10 @@ export const FormInputSchema = z.object({
    validations: z.array(z.enum(['MANDATORY', 'LENGTH', 'RANGE'])),
 });
 
-export const FormSchema = z.object({
+export const formSchema = z.object({
    id: z.string().optional(),
    title: z.string().nonempty(errors.required).max(100, maxHundredError),
    description: z.string().optional(),
    submitMessage: z.string().optional(),
-   inputs: z.array(FormInputSchema),
+   inputs: z.array(formInputSchema),
 });

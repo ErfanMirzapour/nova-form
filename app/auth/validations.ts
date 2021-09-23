@@ -7,7 +7,7 @@ import authErrors from './errors';
 
 const password = z.string().min(6, errors.min(6));
 
-export const Signup = z.object({
+export const signupSchema = z.object({
    username: z
       .string()
       .min(2, errors.min(2))
@@ -17,15 +17,13 @@ export const Signup = z.object({
          authErrors.invalidUsername
       ),
    password,
+   passwordConfirm: password.optional(),
 });
 
-export const SignupForm = Signup.extend({
-   passwordConfirm: password,
-});
+export const loginSchema = signupSchema;
 
-export const Login = Signup;
-
-export const ChangePassword = z.object({
+export const changePasswordSchema = z.object({
    currentPassword: password,
    newPassword: password,
+   newPasswordConfirm: password,
 });

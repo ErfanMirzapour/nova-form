@@ -2,7 +2,7 @@ import { AuthenticationError, Link, useMutation, Routes } from 'blitz';
 
 import { LabeledTextField, Form, FORM_ERROR } from '~core/components';
 import { login } from '~auth/resolvers';
-import { Login } from '~auth/validations';
+import { loginSchema } from '~auth/validations';
 import errors from '../errors';
 
 type LoginFormProps = {
@@ -18,7 +18,7 @@ const LoginForm = (props: LoginFormProps) => {
 
          <Form
             submitText='Login'
-            schema={Login}
+            schema={loginSchema}
             initialValues={{ username: '', password: '' }}
             onSubmit={async values => {
                try {

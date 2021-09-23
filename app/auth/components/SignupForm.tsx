@@ -3,7 +3,7 @@ import { useMutation } from 'blitz';
 import { LabeledTextField, Form, FORM_ERROR } from '~core/components';
 
 import { signup } from '../resolvers';
-import { SignupForm as SignupFormSchema } from '../validations';
+import { signupSchema } from '../validations';
 import errors from '../errors';
 
 type SignupFormProps = {
@@ -19,7 +19,7 @@ const SignupForm = (props: SignupFormProps) => {
 
          <Form
             submitText='Create Account'
-            schema={SignupFormSchema}
+            schema={signupSchema}
             initialValues={{ username: '', password: '', passwordConfirm: '' }}
             onSubmit={async ({ passwordConfirm, ...values }) => {
                if (values.password !== passwordConfirm)
