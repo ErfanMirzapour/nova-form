@@ -7,7 +7,10 @@ import { formSchema } from '../validations';
 export default resolver.pipe(
    resolver.zod(formSchema),
    resolver.authorize(),
-   ({ id, inputs, ...form }) => {
+   async ({ id, inputs, ...form }, { session }) => {
+      if (!(await db.form.count({ where: { ownerId: session.userId } })))
+         return;
+
       return db.form.update({
          where: { id },
          data: {

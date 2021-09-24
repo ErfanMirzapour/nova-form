@@ -3,8 +3,16 @@ import { z } from 'zod';
 
 import db from '~db';
 
-export default resolver.pipe(resolver.zod(z.string()), async id => {
-   await db.customInput.deleteMany({ where: { formId: id } });
+export default resolver.pipe(
+   resolver.zod(z.string()),
+   resolver.authorize(),
+   async (id, { session }) => {
+      const deleteInputs = db.customInput.deleteMany({ where: { formId: id } });
 
-   return db.form.delete({ where: { id } });
-});
+      const deleteForm = db.form.deleteMany({
+         where: { id, ownerId: session.userId },
+      });
+
+      return db.$transaction([deleteInputs, deleteForm]);
+   }
+);
