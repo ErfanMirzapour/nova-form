@@ -12,7 +12,7 @@ const Forms = () => {
 
    const handleLogout = async () => {
       await logoutMutation();
-      router.push('/login');
+      router.push(Routes.LoginPage());
    };
 
    if (currentUser) {
@@ -46,7 +46,7 @@ const Forms = () => {
    }
 };
 
-const Home: Page = () => {
+const FormsPage: Page = () => {
    return (
       <Suspense fallback='Loading...'>
          <Forms />
@@ -54,8 +54,8 @@ const Home: Page = () => {
    );
 };
 
-Home.authenticate = true;
-Home.suppressFirstRenderFlicker = true;
-Home.title = 'فرم ها';
+FormsPage.authenticate = true;
+FormsPage.suppressFirstRenderFlicker = true;
+FormsPage.title = 'فرم ها';
 
-export default Home;
+export default FormsPage;

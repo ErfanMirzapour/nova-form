@@ -9,6 +9,7 @@ import {
    useQueryErrorResetBoundary,
    Head,
    useRouter,
+   Routes,
 } from 'blitz';
 
 import authErrors from '~auth/errors';
@@ -19,7 +20,7 @@ function RootErrorFallback({ error, resetErrorBoundary }: ErrorFallbackProps) {
    const route = useRouter();
 
    if (error instanceof AuthenticationError) {
-      route.push('/login');
+      route.push(Routes.LoginPage());
       return null;
    } else if (error instanceof AuthorizationError) {
       return (
@@ -42,7 +43,7 @@ const App = ({
    Component,
    pageProps,
 }: AppProps & { Component: { title: string } }) => {
-   const title = Component.title || 'نوا فرم';
+   const title = Component.title + ' | نوا فرم';
 
    return (
       <ChakraProvider theme={theme}>
