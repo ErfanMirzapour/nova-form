@@ -2,7 +2,6 @@ import { z } from 'zod';
 import sanitizer from 'string-sanitizer';
 
 import errors from '~core/errors';
-
 import authErrors from './errors';
 
 const password = z.string().min(6, errors.min(6));

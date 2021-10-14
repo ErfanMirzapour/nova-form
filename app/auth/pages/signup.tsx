@@ -1,10 +1,9 @@
-import { useRouter, BlitzPage, Routes } from 'blitz';
+import { useRouter, Routes } from 'blitz';
 
-import { Layout } from '~core/components';
-
+import { Page } from '~/app/core/types';
 import { SignupForm } from '../components';
 
-const SignupPage: BlitzPage = () => {
+const SignupPage: Page = () => {
    const router = useRouter();
 
    return (
@@ -14,7 +13,7 @@ const SignupPage: BlitzPage = () => {
    );
 };
 
-SignupPage.redirectAuthenticatedTo = '/';
-SignupPage.getLayout = page => <Layout title='Sign Up'>{page}</Layout>;
+SignupPage.redirectAuthenticatedTo = '/forms';
+SignupPage.title = 'ساخت حساب کاربری';
 
 export default SignupPage;

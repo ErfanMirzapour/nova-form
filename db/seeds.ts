@@ -1,16 +1,9 @@
 import db, { Prisma } from '.';
+import { SecurePassword } from 'blitz';
 import { name, internet } from 'faker';
 
 import inputs from './inputs';
 
-const hashedPassword =
-   'JGFyZ29uMmlkJHY9MTkkbT02NTUzNix0PTIscD0xJHd0QVlZZjgxa2tMeWFhTmo0eGxUNGckN01mZ21PSnBpL09RZ1lOcFdUU2pOSEJBQk51ZzhtVGJnblZnOGVyYUc5TQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=';
-
-const users: Prisma.UserCreateInput[] = Array.from(Array(5), () => ({
-   username: internet.userName(),
-   fullName: `${name.firstName()} ${name.firstName()}`,
-   hashedPassword,
-}));
 const customInputs: Prisma.CustomInputCreateManyFormInput[] = [
    {
       label: 'نام',
@@ -42,6 +35,14 @@ const formResult = [
 ];
 
 const seed = async () => {
+   const hashedPassword = await SecurePassword.hash('123456');
+
+   const users: Prisma.UserCreateInput[] = Array.from(Array(5), () => ({
+      username: internet.userName(),
+      fullName: `${name.firstName()} ${name.firstName()}`,
+      hashedPassword,
+   }));
+
    await db.user.createMany({
       data: [
          {

@@ -1,7 +1,6 @@
 import { NotFoundError, SecurePassword, resolver } from 'blitz';
 
 import db from '~db';
-
 import { authenticateUser } from './login';
 import { changePasswordSchema } from '../validations';
 

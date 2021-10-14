@@ -1,33 +1,33 @@
 import { AuthenticationError, Link, useMutation, Routes } from 'blitz';
 
-import { LabeledTextField, Form, FORM_ERROR } from '~core/components';
+import { TextField, HookForm, FORM_ERROR } from '~core/components';
 import { login } from '~auth/resolvers';
 import { loginSchema } from '~auth/validations';
-import errors from '../errors';
+import authErrors from '../errors';
 
-type LoginFormProps = {
+interface Props {
    onSuccess?: () => void;
-};
+}
 
-const LoginForm = (props: LoginFormProps) => {
+const LoginForm = ({ onSuccess }: Props) => {
    const [loginMutation] = useMutation(login);
 
    return (
       <div>
          <h1>Login</h1>
 
-         <Form
+         <HookForm
             submitText='Login'
             schema={loginSchema}
             initialValues={{ username: '', password: '' }}
             onSubmit={async values => {
                try {
                   await loginMutation(values);
-                  props.onSuccess?.();
+                  onSuccess?.();
                } catch (error) {
                   if (error instanceof AuthenticationError) {
                      return {
-                        [FORM_ERROR]: errors.invalidCredentials,
+                        [FORM_ERROR]: authErrors.invalidCredentials,
                      };
                   } else {
                      return {
@@ -37,18 +37,18 @@ const LoginForm = (props: LoginFormProps) => {
                }
             }}
          >
-            <LabeledTextField
+            <TextField
                name='username'
                label='نام کاربری'
                placeholder='نام کاربری'
             />
-            <LabeledTextField
+            <TextField
                name='password'
                label='Password'
                placeholder='Password'
                type='password'
             />
-         </Form>
+         </HookForm>
 
          <div style={{ marginTop: '1rem' }}>
             Or <Link href={Routes.SignupPage()}>Sign Up</Link>

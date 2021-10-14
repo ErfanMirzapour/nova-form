@@ -1,7 +1,6 @@
 import { resolver } from 'blitz';
 
 import db from '~db';
-
 import { formSchema } from '../validations';
 
 export default resolver.pipe(

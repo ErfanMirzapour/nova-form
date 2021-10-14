@@ -1,7 +1,6 @@
 import { useMutation } from 'blitz';
 
-import { LabeledTextField, Form, FORM_ERROR } from '~core/components';
-
+import { TextField, HookForm, FORM_ERROR } from '~core/components';
 import { signup } from '../resolvers';
 import { signupSchema } from '../validations';
 import errors from '../errors';
@@ -17,7 +16,7 @@ const SignupForm = (props: SignupFormProps) => {
       <div>
          <h1>Create an Account</h1>
 
-         <Form
+         <HookForm
             submitText='Create Account'
             schema={signupSchema}
             initialValues={{ username: '', password: '', passwordConfirm: '' }}
@@ -43,24 +42,24 @@ const SignupForm = (props: SignupFormProps) => {
                }
             }}
          >
-            <LabeledTextField
+            <TextField
                name='username'
                label='نام کاربری'
                placeholder='نام کاربری'
             />
-            <LabeledTextField
+            <TextField
                name='password'
                label='Password'
                placeholder='Password'
                type='password'
             />
-            <LabeledTextField
+            <TextField
                name='passwordConfirm'
                label='تکرار رمز عبور'
                placeholder='تکرار رمز عبور'
                type='password'
             />
-         </Form>
+         </HookForm>
       </div>
    );
 };

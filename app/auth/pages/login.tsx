@@ -1,27 +1,24 @@
-import { useRouter, BlitzPage } from 'blitz';
+import { useRouter } from 'blitz';
 
-import { Layout } from '~core/components';
-
+import { Page } from '~core/types';
 import { LoginForm } from '../components';
 
-const LoginPage: BlitzPage = () => {
+const LoginPage: Page = () => {
    const router = useRouter();
 
    return (
-      <div>
-         <LoginForm
-            onSuccess={() => {
-               const next = router.query.next
-                  ? decodeURIComponent(router.query.next as string)
-                  : '/';
-               router.push(next);
-            }}
-         />
-      </div>
+      <LoginForm
+         onSuccess={() => {
+            const next = router.query.next
+               ? decodeURIComponent(router.query.next as string)
+               : '/forms';
+            router.push(next);
+         }}
+      />
    );
 };
 
-LoginPage.redirectAuthenticatedTo = '/';
-LoginPage.getLayout = page => <Layout title='Log In'>{page}</Layout>;
+LoginPage.redirectAuthenticatedTo = '/forms';
+LoginPage.title = 'ورود به حساب کاربری';
 
 export default LoginPage;

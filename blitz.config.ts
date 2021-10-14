@@ -7,19 +7,21 @@ const config: BlitzConfig = {
          isAuthorized: simpleRolesIsAuthorized,
       }),
    ],
+   redirects() {
+      return [
+         {
+            source: '/',
+            destination: '/forms',
+            permanent: true,
+         },
+      ];
+   },
    eslint: {
       ignoreDuringBuilds: true,
    },
    typescript: {
       ignoreBuildErrors: true,
    },
-   /* Uncomment this to customize the webpack config
-  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
-    // Note: we provide webpack above so you should not `require` it
-    // Perform customizations to webpack config
-    // Important: return the modified config
-    return config
-  },
-  */
 };
+
 module.exports = config;

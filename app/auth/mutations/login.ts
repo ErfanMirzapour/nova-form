@@ -2,7 +2,6 @@ import { resolver, SecurePassword, AuthenticationError } from 'blitz';
 
 import db from '~db';
 import { Role } from '~/types';
-
 import { loginSchema } from '../validations';
 
 export const authenticateUser = async (

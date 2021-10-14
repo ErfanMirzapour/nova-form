@@ -8,9 +8,7 @@ const theme = extendTheme({
       heading: 'Iran Yekan',
    },
    styles: {
-      global: {
-         body: {},
-      },
+      global: {},
    },
 });
 
