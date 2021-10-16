@@ -1,11 +1,15 @@
-import { useState, ReactNode, PropsWithoutRef } from 'react';
+import { useState, PropsWithChildren } from 'react';
 import { FormProvider, useForm, UseFormProps } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import {
+   Button,
+   FormControl,
+   FormErrorMessage,
+   VStack,
+} from '@chakra-ui/react';
 
-export interface Props<Schema extends z.ZodType<any, any>>
-   extends PropsWithoutRef<JSX.IntrinsicElements['form']> {
-   children?: ReactNode;
+export interface Props<Schema extends z.ZodType<any, any>> {
    submitText?: string;
    schema?: Schema;
    onSubmit: (values: z.infer<Schema>) => Promise<void | OnSubmitResult>;
@@ -26,7 +30,7 @@ const HookForm = <Schema extends z.ZodType<any, any>>({
    initialValues,
    onSubmit,
    ...props
-}: Props<Schema>) => {
+}: PropsWithChildren<Props<Schema>>) => {
    const ctx = useForm<z.infer<Schema>>({
       mode: 'onTouched',
       resolver: schema ? zodResolver(schema) : undefined,
@@ -51,19 +55,30 @@ const HookForm = <Schema extends z.ZodType<any, any>>({
 
    return (
       <FormProvider {...ctx}>
-         <form onSubmit={ctx.handleSubmit(handleSubmit)} {...props}>
-            {children}
-
+         <VStack
+            as='form'
+            onSubmit={ctx.handleSubmit(handleSubmit)}
+            spacing='5'
+            w='full'
+            {...props}
+         >
             {formError && (
-               <div role='alert' style={{ color: 'red' }}>
-                  {formError}
-               </div>
+               <FormControl isInvalid>
+                  <FormErrorMessage>{formError}</FormErrorMessage>
+               </FormControl>
             )}
 
-            <button type='submit' disabled={ctx.formState.isSubmitting}>
+            {children}
+
+            <Button
+               type='submit'
+               disabled={ctx.formState.isSubmitting}
+               w='full'
+               colorScheme='blue'
+            >
                {submitText || 'ثبت'}
-            </button>
-         </form>
+            </Button>
+         </VStack>
       </FormProvider>
    );
 };

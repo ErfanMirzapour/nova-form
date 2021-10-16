@@ -8,7 +8,23 @@ const theme = extendTheme({
       heading: 'Iran Yekan',
    },
    styles: {
-      global: {},
+      global: {
+         a: {
+            cursor: 'pointer',
+         },
+      },
+   },
+   components: {
+      Divider: {
+         baseStyle: {
+            borderColor: 'gray.500',
+         },
+      },
+      Heading: {
+         defaultProps: {
+            size: 'lg',
+         },
+      },
    },
 });
 

@@ -1,69 +1,89 @@
-import {
-   useRouter,
-   AuthenticationError,
-   Link,
-   useMutation,
-   Routes,
-} from 'blitz';
+import { useRouter, AuthenticationError, useMutation, Routes } from 'blitz';
+import { z } from 'zod';
+import { Center, Divider, Heading, VStack } from '@chakra-ui/react';
+import { SubmitHandler } from 'react-hook-form';
 
 import { Page } from '~core/types';
-import { TextField, HookForm, FORM_ERROR } from '~core/components';
-import { login } from '~auth/resolvers';
+import {
+   TextField,
+   HookForm,
+   FORM_ERROR,
+   ButtonLink,
+   Card,
+} from '~core/components';
+import { loginMutation } from '~auth/resolvers';
 import { loginSchema } from '~auth/validations';
 import authErrors from '~auth/errors';
+import { title as signupTitle } from './signup';
 
-const title = 'ورود حساب کاربری';
+export const title = 'ورود به حساب کاربری';
+const initialValues = { username: '', password: '' };
 
 const LoginPage: Page = () => {
    const router = useRouter();
-   const [loginMutation] = useMutation(login);
+   const [login] = useMutation(loginMutation);
+
+   const handleLogin: SubmitHandler<z.infer<typeof loginSchema>> =
+      async values => {
+         try {
+            await login(values);
+            router.push(Routes.FormsPage());
+         } catch (error) {
+            if (error instanceof AuthenticationError) {
+               return {
+                  [FORM_ERROR]: authErrors.invalidCredentials,
+               };
+            } else {
+               return {
+                  [FORM_ERROR]: error.toString(),
+               };
+            }
+         }
+      };
 
    return (
-      <div>
-         <h1>Login</h1>
+      <Center h='100vh'>
+         <Card as={VStack} spacing='6' w='96'>
+            <Heading as='h1'>{title}</Heading>
 
-         <HookForm
-            submitText={title}
-            schema={loginSchema}
-            initialValues={{ username: '', password: '' }}
-            onSubmit={async values => {
-               try {
-                  await loginMutation(values);
-                  router.push(Routes.FormsPage());
-               } catch (error) {
-                  if (error instanceof AuthenticationError) {
-                     return {
-                        [FORM_ERROR]: authErrors.invalidCredentials,
-                     };
-                  } else {
-                     return {
-                        [FORM_ERROR]: error.toString(),
-                     };
-                  }
-               }
-            }}
-         >
-            <TextField
-               name='username'
-               label='نام کاربری'
-               placeholder='نام کاربری'
-            />
-            <TextField
-               name='password'
-               label='Password'
-               placeholder='Password'
-               type='password'
-            />
-         </HookForm>
+            <HookForm
+               submitText='ورود'
+               schema={loginSchema}
+               initialValues={initialValues}
+               onSubmit={handleLogin}
+            >
+               <TextField
+                  required
+                  name='username'
+                  autoComplete='username'
+                  label='نام کاربری'
+                  placeholder='نام کاربری'
+               />
+               <TextField
+                  required
+                  type='password'
+                  name='password'
+                  autoComplete='current-password'
+                  label='رمز عبور'
+                  placeholder='رمز عبور'
+               />
+            </HookForm>
 
-         <div style={{ marginTop: '1rem' }}>
-            Or <Link href={Routes.SignupPage()}>Sign Up</Link>
-         </div>
-      </div>
+            <Divider />
+
+            <ButtonLink
+               href={Routes.SignupPage()}
+               colorScheme='orange'
+               w='full'
+            >
+               {signupTitle}
+            </ButtonLink>
+         </Card>
+      </Center>
    );
 };
 
-LoginPage.redirectAuthenticatedTo = Routes.FormsPage();
 LoginPage.title = title;
+LoginPage.redirectAuthenticatedTo = Routes.FormsPage();
 
 export default LoginPage;

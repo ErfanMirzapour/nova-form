@@ -19,10 +19,10 @@ export const signupSchema = z.object({
    passwordConfirm: password.optional(),
 });
 
-export const loginSchema = signupSchema;
+export const loginSchema = signupSchema.omit({ passwordConfirm: true });
 
 export const changePasswordSchema = z.object({
    currentPassword: password,
-   newPassword: password,
-   newPasswordConfirm: password,
+   password,
+   passwordConfirm: password,
 });

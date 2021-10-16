@@ -1,30 +1,48 @@
-import { PropsWithoutRef } from 'react';
+import {
+   FormControl,
+   FormErrorMessage,
+   FormLabel,
+   Input,
+   NumberDecrementStepper,
+   NumberIncrementStepper,
+   NumberInput,
+   NumberInputField,
+   NumberInputStepper,
+} from '@chakra-ui/react';
+import { ComponentPropsWithoutRef } from 'react';
 
 import { useHookFormInput } from '~core/hooks';
 
-export interface Props extends PropsWithoutRef<JSX.IntrinsicElements['input']> {
+export interface Props extends Omit<ComponentPropsWithoutRef<'input'>, 'size'> {
    name: string;
    label: string;
    type?: 'text' | 'password' | 'email' | 'url' | 'number';
-   outerProps?: PropsWithoutRef<JSX.IntrinsicElements['div']>;
 }
 
-const TextField = ({ label, outerProps, name, ...props }: Props) => {
+const TextField = ({ label, name, required, ...props }: Props) => {
    const { register, error, isSubmitting } = useHookFormInput(name);
+   const resisterProps = register(name);
 
    return (
-      <div {...outerProps}>
-         <label>
-            {label}
-            <input disabled={isSubmitting} {...register(name)} {...props} />
-         </label>
-
-         {error && (
-            <div role='alert' style={{ color: 'red' }}>
-               {error}
-            </div>
+      <FormControl
+         isRequired={required}
+         isInvalid={!!error}
+         isDisabled={isSubmitting}
+      >
+         <FormLabel>{label}</FormLabel>
+         {props.type === 'number' ? (
+            <NumberInput>
+               <NumberInputField {...resisterProps} {...props} />
+               <NumberInputStepper>
+                  <NumberIncrementStepper />
+                  <NumberDecrementStepper />
+               </NumberInputStepper>
+            </NumberInput>
+         ) : (
+            <Input {...resisterProps} {...props} />
          )}
-      </div>
+         <FormErrorMessage>{error}</FormErrorMessage>
+      </FormControl>
    );
 };
 

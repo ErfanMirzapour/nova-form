@@ -7,7 +7,7 @@ import { changePasswordSchema } from '../validations';
 export default resolver.pipe(
    resolver.zod(changePasswordSchema),
    resolver.authorize(),
-   async ({ currentPassword, newPassword }, ctx) => {
+   async ({ currentPassword, password }, ctx) => {
       const user = await db.user.findFirst({
          where: { id: ctx.session.userId! },
       });
@@ -15,7 +15,7 @@ export default resolver.pipe(
 
       await authenticateUser(user.username, currentPassword);
 
-      const hashedPassword = await SecurePassword.hash(newPassword.trim());
+      const hashedPassword = await SecurePassword.hash(password.trim());
       await db.user.update({
          where: { id: user.id },
          data: { hashedPassword },

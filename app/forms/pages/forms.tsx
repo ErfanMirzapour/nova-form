@@ -3,15 +3,15 @@ import { Link, useMutation, Routes, useRouter } from 'blitz';
 
 import { useCurrentUser } from '~core/hooks';
 import { Page } from '~core/types';
-import { logout } from '~auth/resolvers';
+import { logoutMutation } from '~auth/resolvers';
 
 const Forms = () => {
    const currentUser = useCurrentUser();
    const router = useRouter();
-   const [logoutMutation] = useMutation(logout);
+   const [logout] = useMutation(logoutMutation);
 
    const handleLogout = async () => {
-      await logoutMutation();
+      await logout();
       router.push(Routes.LoginPage());
    };
 
