@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.4.0](https://github.com/ErfanMirzapour/nova-form/compare/v0.3.0...v0.4.0) (2021-10-19)
+
+
+### Features
+
+* add forms page ([9e59a99](https://github.com/ErfanMirzapour/nova-form/commit/9e59a998ac22b3b526c71986ac03bd76288228a7))
+* improve login/signup ui ([ebd4332](https://github.com/ErfanMirzapour/nova-form/commit/ebd4332e42be5ecc28534bf2a4ad4953c9ce10d0))
+
 ## [0.3.0](https://github.com/ErfanMirzapour/nova-form/compare/v0.2.0...v0.3.0) (2021-10-14)
 
 ## [0.2.0](https://github.com/ErfanMirzapour/nova-form/compare/v0.1.0...v0.2.0) (2021-09-24)
