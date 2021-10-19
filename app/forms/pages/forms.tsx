@@ -1,49 +1,57 @@
 import { Suspense } from 'react';
-import { Link, useMutation, Routes, useRouter } from 'blitz';
+import { useQuery } from 'blitz';
+import { Container, LinkBox, LinkOverlay, Text } from '@chakra-ui/react';
 
-import { useCurrentUser } from '~core/hooks';
 import { Page } from '~core/types';
-import { logoutMutation } from '~auth/resolvers';
+import { Card, Header } from '~/app/core/components';
+import getForms from '../queries/getForms';
 
 const Forms = () => {
-   const currentUser = useCurrentUser();
-   const router = useRouter();
-   const [logout] = useMutation(logoutMutation);
+   const [forms] = useQuery(getForms, undefined);
 
-   const handleLogout = async () => {
-      await logout();
-      router.push(Routes.LoginPage());
-   };
+   return (
+      <>
+         <Header />
 
-   if (currentUser) {
-      return (
-         <>
-            <button className='button small' onClick={handleLogout}>
-               Logout
-            </button>
-            <div>
-               User id: <code>{currentUser.id}</code>
-               <br />
-               User role: <code>{currentUser.role}</code>
-            </div>
-         </>
-      );
-   } else {
-      return (
-         <>
-            <Link href={Routes.SignupPage()}>
-               <a className='button small'>
-                  <strong>Sign Up</strong>
-               </a>
-            </Link>
-            <Link href={Routes.LoginPage()}>
-               <a className='button small'>
-                  <strong>Login</strong>
-               </a>
-            </Link>
-         </>
-      );
-   }
+         <Container
+            d='flex'
+            flexWrap='wrap'
+            sx={{
+               '& > *:nth-child(odd)': {
+                  ml: '6',
+               },
+            }}
+         >
+            {forms.map(({ id, title, description }) => (
+               <LinkBox
+                  key={id}
+                  role='group'
+                  w='calc(50% - .75rem)'
+                  mb='6'
+                  transition='.2s'
+                  _hover={{
+                     transform: 'translateY(calc(var(--space-2) * -1))',
+                  }}
+               >
+                  <Card
+                     transition='.2s'
+                     _groupHover={{
+                        bg: 'blue.600',
+                        color: 'white',
+                     }}
+                  >
+                     <LinkOverlay href='#'>
+                        <Text fontWeight='bold' fontSize='3xl' mb='6'>
+                           {title}
+                        </Text>
+                     </LinkOverlay>
+                     <Text fontWeight='bold'>{description}</Text>
+                  </Card>
+               </LinkBox>
+            ))}
+         </Container>
+      </>
+   );
 };
 
 const FormsPage: Page = () => {

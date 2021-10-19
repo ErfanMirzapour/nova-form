@@ -39,7 +39,7 @@ const seed = async () => {
 
    const users: Prisma.UserCreateInput[] = Array.from(Array(5), () => ({
       username: internet.userName(),
-      fullName: `${name.firstName()} ${name.firstName()}`,
+      // fullName: `${name.firstName()} ${name.firstName()}`,
       hashedPassword,
    }));
 
@@ -47,13 +47,13 @@ const seed = async () => {
       data: [
          {
             username: 'erfanmirzapour',
-            fullName: 'Erfan Mirzapour',
+            // fullName: 'Erfan Mirzapour',
             hashedPassword,
             role: 'ADMIN',
          },
          {
             username: 'test',
-            fullName: 'Test User',
+            // fullName: 'Test User',
             hashedPassword,
             role: 'USER',
          },
@@ -63,7 +63,7 @@ const seed = async () => {
 
    await db.input.createMany({ data: inputs });
 
-   await db.form.create({
+   const newForm = {
       data: {
          title: 'فرم اول',
          description: 'توضیحات فرم',
@@ -88,18 +88,21 @@ const seed = async () => {
                data: customInputs,
             },
          },
-         results: {
-            create: {
-               submitter: {
-                  connect: {
-                     username: 'test',
-                  },
-               },
-               result: formResult,
-            },
-         },
+         // results: {
+         //    create: {
+         //       submitter: {
+         //          connect: {
+         //             username: 'test',
+         //          },
+         //       },
+         //       result: formResult,
+         //    },
+         // },
       },
-   });
+   };
+   await db.form.create(newForm);
+   await db.form.create(newForm);
+   await db.form.create(newForm);
 };
 
 export default seed;

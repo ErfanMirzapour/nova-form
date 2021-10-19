@@ -14,7 +14,12 @@ export default resolver.pipe(
             hashedPassword,
             role: 'USER',
          },
-         select: { id: true, fullName: true, username: true, role: true },
+         select: {
+            id: true,
+            //  fullName: true,
+            username: true,
+            role: true,
+         },
       });
 
       await ctx.session.$create({ userId: user.id, role: user.role as Role });

@@ -2,7 +2,7 @@ import { Button, ButtonProps } from '@chakra-ui/react';
 import { Link, RouteUrlObject } from 'blitz';
 
 interface Props {
-   href: RouteUrlObject;
+   href: RouteUrlObject | string;
 }
 
 const ButtonLink = ({ href, children, ...props }: Props & ButtonProps) => (

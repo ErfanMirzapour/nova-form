@@ -25,6 +25,11 @@ const theme = extendTheme({
             size: 'lg',
          },
       },
+      Container: {
+         baseStyle: {
+            maxW: 'container.md',
+         },
+      },
    },
 });
 

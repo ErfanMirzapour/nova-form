@@ -32,7 +32,7 @@ model User {
   createdAt      DateTime @default(now())
   username       String   @unique @db.VarChar(50)
   hashedPassword String
-  fullName       String?  @db.Char(50)
+  //   fullName       String?  @db.Char(50)
   role           Role     @default(USER)
 
   sessions    Session[]
