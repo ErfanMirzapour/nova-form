@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.5.0](https://github.com/ErfanMirzapour/nova-form/compare/v0.4.0...v0.5.0) (2021-10-20)
+
+
+### Features
+
+* add form register page ([4f4288f](https://github.com/ErfanMirzapour/nova-form/commit/4f4288f655a742bfc52b0787d98d8625e369742f))
+* add Select ([1e349e6](https://github.com/ErfanMirzapour/nova-form/commit/1e349e64c91ff49bd6885a5b4d64906f1691afd6))
+* add TextArea ([b47707a](https://github.com/ErfanMirzapour/nova-form/commit/b47707a00e0fd5fe5122bea40e9d65a321cc76fd))
+* improve forms page ([598cf20](https://github.com/ErfanMirzapour/nova-form/commit/598cf20ea4599a01a76a8cb424faf232358675b2))
+
+
+### Bug Fixes
+
+* font urls ([b6b9645](https://github.com/ErfanMirzapour/nova-form/commit/b6b9645c6120210010b169a1338863a31b39bd04))
+
 ## [0.4.0](https://github.com/ErfanMirzapour/nova-form/compare/v0.3.0...v0.4.0) (2021-10-19)
 
 
