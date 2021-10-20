@@ -1,33 +1,57 @@
 import { Suspense } from 'react';
 import { useQuery } from 'blitz';
-import { Container, LinkBox, LinkOverlay, Text } from '@chakra-ui/react';
+import {
+   Alert,
+   Center,
+   Container,
+   Divider,
+   IconButton,
+   LinkBox,
+   LinkOverlay,
+   Skeleton,
+   Text,
+} from '@chakra-ui/react';
+import { useLocalStorage } from 'react-use';
 
 import { Page } from '~core/types';
 import { Card, Header } from '~/app/core/components';
 import getForms from '../queries/getForms';
+import { MdGridView, MdList } from 'react-icons/md';
 
 const Forms = () => {
+   const [view, viewSet] = useLocalStorage('view', 'grid');
    const [forms] = useQuery(getForms, undefined);
 
    return (
       <>
-         <Header />
-
-         <Container
-            d='flex'
-            flexWrap='wrap'
-            sx={{
-               '& > *:nth-child(odd)': {
-                  ml: '6',
-               },
-            }}
-         >
-            {forms.map(({ id, title, description }) => (
+         <Center w='full'>
+            <IconButton
+               aria-label='مشاهده به صورت گرید'
+               title='مشاهده به صورت گرید'
+               icon={<MdGridView />}
+               ml='2'
+               onClick={() => viewSet('grid')}
+            />
+            <IconButton
+               aria-label='مشاهده به صورت لیست'
+               title='مشاهده به صورت لیست'
+               icon={<MdList />}
+               onClick={() => viewSet('list')}
+            />
+         </Center>
+         <Divider mt='4' mb='8' />
+         {forms.length === 0 ? (
+            <Alert status='info' justifyContent='center'>
+               شما هیچ فرمی ایجاد نکرده اید!
+            </Alert>
+         ) : (
+            forms.map(({ id, title, description }, i) => (
                <LinkBox
                   key={id}
                   role='group'
-                  w='calc(50% - .75rem)'
+                  w={view === 'list' ? '100%' : 'calc(50% - .75rem)'}
                   mb='6'
+                  ml={view === 'grid' && i % 2 === 0 ? '6' : '0'}
                   transition='.2s'
                   _hover={{
                      transform: 'translateY(calc(var(--space-2) * -1))',
@@ -39,6 +63,7 @@ const Forms = () => {
                         bg: 'blue.600',
                         color: 'white',
                      }}
+                     h='full'
                   >
                      <LinkOverlay href='#'>
                         <Text fontWeight='bold' fontSize='3xl' mb='6'>
@@ -48,17 +73,33 @@ const Forms = () => {
                      <Text fontWeight='bold'>{description}</Text>
                   </Card>
                </LinkBox>
-            ))}
-         </Container>
+            ))
+         )}
       </>
    );
 };
 
+const FormsSkeleton = Array.from({ length: 4 }).map((_, i) => (
+   <Skeleton
+      key={i}
+      w='calc(50% - .75rem)'
+      h='48'
+      mb='6'
+      ml={i % 2 === 0 ? '6' : '0'}
+      rounded='2xl'
+   />
+));
+
 const FormsPage: Page = () => {
    return (
-      <Suspense fallback='Loading...'>
-         <Forms />
-      </Suspense>
+      <>
+         <Header />
+         <Container d='flex' flexWrap='wrap'>
+            <Suspense fallback={FormsSkeleton}>
+               <Forms />
+            </Suspense>
+         </Container>
+      </>
    );
 };
 
