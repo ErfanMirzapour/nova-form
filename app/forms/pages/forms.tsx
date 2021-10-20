@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import { Link, Routes, useQuery } from 'blitz';
 import {
    Alert,
+   Badge,
    Center,
    Container,
    Divider,
@@ -20,7 +21,11 @@ import { MdGridView, MdList } from 'react-icons/md';
 
 const Forms = () => {
    const [view, viewSet] = useLocalStorage('view', 'grid');
-   const [forms] = useQuery(getForms, { updatedAt: 'desc' });
+   const [forms] = useQuery(
+      getForms,
+      { updatedAt: 'desc' },
+      { cacheTime: 1000 }
+   );
 
    return (
       <>
@@ -45,7 +50,7 @@ const Forms = () => {
                شما هیچ فرمی ایجاد نکرده اید!
             </Alert>
          ) : (
-            forms.map(({ id, title, description }, i) => (
+            forms.map(({ id, title, description, createdAt }, i) => (
                <LinkBox
                   key={id}
                   role='group'
@@ -68,7 +73,10 @@ const Forms = () => {
                      <Link href={Routes.EditFormPage({ formId: id })} passHref>
                         <LinkOverlay>
                            <Text fontWeight='bold' fontSize='3xl' mb='6'>
-                              {title}
+                              {title + ' '}
+                              {Date.now() - createdAt.getTime() < 300000 && (
+                                 <Badge colorScheme='green'>جدید</Badge>
+                              )}
                            </Text>
                         </LinkOverlay>
                      </Link>
