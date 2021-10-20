@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0](https://github.com/ErfanMirzapour/nova-form/compare/v0.5.1...v1.0.0) (2021-10-20)
+
+
+### Features
+
+* add NEW badge ([66070cd](https://github.com/ErfanMirzapour/nova-form/commit/66070cd7023e378bf39c30d484a6bd21f15f2cab))
+* improve add/edit form layout ([0b816c9](https://github.com/ErfanMirzapour/nova-form/commit/0b816c9e56eae6f88f8363e297009a0c3b278c6e))
+
 ### [0.5.1](https://github.com/ErfanMirzapour/nova-form/compare/v0.5.0...v0.5.1) (2021-10-20)
 
 
