@@ -13,15 +13,23 @@ import { ComponentPropsWithoutRef } from 'react';
 
 import { useHookFormInput } from '~core/hooks';
 
+type types = 'text' | 'password' | 'email' | 'url' | 'number';
 export interface Props extends Omit<ComponentPropsWithoutRef<'input'>, 'size'> {
    name: string;
    label: string;
-   type?: 'text' | 'password' | 'email' | 'url' | 'number';
+   type?: types | Uppercase<types>;
 }
 
-const TextField = ({ label, name, required, ...props }: Props) => {
+const TextField = ({
+   label,
+   name,
+   required,
+   placeholder = label,
+   ...props
+}: Props) => {
    const { register, error, isSubmitting } = useHookFormInput(name);
    const resisterProps = register(name);
+   let inputType = props.type?.toLowerCase();
 
    return (
       <FormControl
@@ -30,16 +38,20 @@ const TextField = ({ label, name, required, ...props }: Props) => {
          isDisabled={isSubmitting}
       >
          <FormLabel>{label}</FormLabel>
-         {props.type === 'number' ? (
+         {inputType === 'number' ? (
             <NumberInput>
-               <NumberInputField {...resisterProps} {...props} />
+               <NumberInputField
+                  {...resisterProps}
+                  placeholder={placeholder}
+                  {...props}
+               />
                <NumberInputStepper>
                   <NumberIncrementStepper />
                   <NumberDecrementStepper />
                </NumberInputStepper>
             </NumberInput>
          ) : (
-            <Input {...resisterProps} {...props} />
+            <Input {...resisterProps} placeholder={placeholder} {...props} />
          )}
          <FormErrorMessage>{error}</FormErrorMessage>
       </FormControl>
