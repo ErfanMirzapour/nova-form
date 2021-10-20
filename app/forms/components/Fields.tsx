@@ -1,5 +1,13 @@
 import { forwardRef, useImperativeHandle } from 'react';
-import { Box, CloseButton, Flex, Icon, Text, VStack } from '@chakra-ui/react';
+import {
+   Box,
+   CloseButton,
+   Divider,
+   Flex,
+   Icon,
+   Text,
+   VStack,
+} from '@chakra-ui/react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { MdAdd } from 'react-icons/md';
 
@@ -27,13 +35,13 @@ const Fields = forwardRef((_, ref) => {
    if (fields.length === 0) return null;
 
    return (
-      <Card mb='8' boxShadow='none' w='full'>
+      <Card mb='8' boxShadow='none' w='full' p='4'>
          <Box as='fieldset' w='full' fontWeight='bold' fontSize='xl'>
-            <Box as='legend' d='inline-flex' alignItems='center' mb='2'>
-               <Text as='span' ml='2' mb='2'>
-                  فیلد ها
-               </Text>
-            </Box>
+            <Text as='legend' ml='2' mb='2'>
+               فیلد ها
+            </Text>
+
+            <Divider mb='4' />
 
             <VStack spacing='4' alignItems='stretch'>
                {fields.map(({ id, ...input }, i) => (

@@ -57,23 +57,23 @@ const AddFormPage: Page = () => {
 
          <Container>
             <Card mb='8'>
-               <Card mb='8' boxShadow='none' w='full'>
-                  <AddField
-                     addField={field => fieldsRef.current.addField(field)}
-                  />
-               </Card>
-
                <HookForm
                   submitText='ایجاد فرم'
                   schema={formSchema}
                   initialValues={createFormInitialValues}
                   onSubmit={handleCreateForm}
                >
-                  <Fields ref={fieldsRef} />
-
                   <TextField required name='title' label='عنوان' />
                   <TextArea name='description' label='توضیحات' />
+
+                  <Fields ref={fieldsRef} />
                </HookForm>
+            </Card>
+
+            <Card mb='8' w='full'>
+               <AddField
+                  addField={field => fieldsRef.current.addField(field)}
+               />
             </Card>
          </Container>
       </>

@@ -85,10 +85,10 @@ const EditForm = forwardRef(({ id }: EditForm, ref) => {
             initialValues={{ title, description, inputs }}
             onSubmit={handleUpdateForm}
          >
-            <Fields ref={ref} />
-
             <TextField required name='title' label='عنوان' />
             <TextArea name='description' label='توضیحات' />
+
+            <Fields ref={ref} />
          </HookForm>
       </>
    );
@@ -132,15 +132,14 @@ const EditFormPage: Page = () => {
 
          <Container>
             <Card mb='8'>
-               <Card mb='8' boxShadow='none' w='full'>
-                  <AddField
-                     addField={field => fieldsRef.current.addField(field)}
-                  />
-               </Card>
-
                <Suspense fallback={FormsSkeleton}>
                   <EditForm ref={fieldsRef} id={id} />
                </Suspense>
+            </Card>
+            <Card mb='8' w='full'>
+               <AddField
+                  addField={field => fieldsRef.current.addField(field)}
+               />
             </Card>
             <Card mb='8' w='full'>
                <Button
