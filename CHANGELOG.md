@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.5.1](https://github.com/ErfanMirzapour/nova-form/compare/v0.5.0...v0.5.1) (2021-10-20)
+
+
+### Features
+
+* add edit-form ([9e605d6](https://github.com/ErfanMirzapour/nova-form/commit/9e605d65244805b8a4939adf2c488f57f051125f))
+
 ## [0.5.0](https://github.com/ErfanMirzapour/nova-form/compare/v0.4.0...v0.5.0) (2021-10-20)
 
 
