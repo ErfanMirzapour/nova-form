@@ -8,20 +8,20 @@ const customInputs: Prisma.CustomInputCreateManyFormInput[] = [
    {
       label: 'نام',
       placeholder: 'نام خود را وارد کنید',
-      validations: ['MANDATORY', 'LENGTH'],
-      wide: false,
+      // validations: ['MANDATORY', 'LENGTH'],
+      // wide: false,
    },
    {
       label: 'نام خانوادگی',
       placeholder: 'نام خانوادگی خود را وارد کنید',
-      validations: ['MANDATORY', 'LENGTH'],
-      wide: false,
+      // validations: ['MANDATORY', 'LENGTH'],
+      // wide: false,
    },
-   {
-      type: 'SELECT',
-      label: 'کشور',
-      options: ['ایران', 'امارات', 'ترکیه'],
-   },
+   // {
+   //    type: 'SELECT',
+   //    label: 'کشور',
+   //    options: ['ایران', 'امارات', 'ترکیه'],
+   // },
 ];
 const formResult = [
    {

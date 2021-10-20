@@ -11,9 +11,11 @@ import {
 
 export interface Props<Schema extends z.ZodType<any, any>> {
    submitText?: string;
+   submitScheme?: string;
    schema?: Schema;
-   onSubmit: (values: z.infer<Schema>) => Promise<void | OnSubmitResult>;
+   onSubmit: (values: z.infer<Schema>) => Promise<void | OnSubmitResult> | void;
    initialValues?: UseFormProps<z.infer<Schema>>['defaultValues'];
+   resetAfterSubmit?: boolean;
 }
 
 interface OnSubmitResult {
@@ -29,6 +31,8 @@ const HookForm = <Schema extends z.ZodType<any, any>>({
    schema,
    initialValues,
    onSubmit,
+   resetAfterSubmit,
+   submitScheme,
    ...props
 }: PropsWithChildren<Props<Schema>>) => {
    const ctx = useForm<z.infer<Schema>>({
@@ -51,6 +55,7 @@ const HookForm = <Schema extends z.ZodType<any, any>>({
             });
          }
       }
+      if (resetAfterSubmit) ctx.reset();
    };
 
    return (
@@ -74,7 +79,7 @@ const HookForm = <Schema extends z.ZodType<any, any>>({
                type='submit'
                disabled={ctx.formState.isSubmitting}
                w='full'
-               colorScheme='blue'
+               colorScheme={submitScheme || 'blue'}
             >
                {submitText || 'ثبت'}
             </Button>

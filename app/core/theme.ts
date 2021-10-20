@@ -27,7 +27,7 @@ const theme = extendTheme({
       },
       Container: {
          baseStyle: {
-            maxW: 'container.md',
+            maxW: 'container.sm',
          },
       },
    },

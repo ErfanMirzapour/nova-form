@@ -1,16 +1,23 @@
-import { Box, Button, Container } from '@chakra-ui/react';
+import { Box, Button, Container, Icon } from '@chakra-ui/react';
+import { MdExitToApp, MdPlaylistAdd, MdList } from 'react-icons/md';
 import { Routes, useMutation, useRouter } from 'blitz';
 
 import { logoutMutation } from '~/app/auth/resolvers';
 import ButtonLink from './ButtonLink';
 
+const MdExitToAppRtl = () => (
+   <Box transform='rotateZ(180deg)'>
+      <MdExitToApp />
+   </Box>
+);
+
 const Header = () => {
-   const router = useRouter();
+   const { pathname, push: routerPush } = useRouter();
    const [logout] = useMutation(logoutMutation);
 
    const handleLogout = async () => {
       await logout();
-      router.push(Routes.LoginPage());
+      routerPush(Routes.LoginPage());
    };
 
    return (
@@ -21,8 +28,29 @@ const Header = () => {
             justifyContent='space-between'
             alignItems='center'
          >
-            <ButtonLink href='#'>ایجاد فرم</ButtonLink>
-            <Button onClick={handleLogout}>خروج</Button>
+            {!pathname.match(/forms\/?$/) && (
+               <ButtonLink
+                  href={Routes.FormsPage()}
+                  rightIcon={<Icon as={MdList} />}
+               >
+                  لیست فرم ها
+               </ButtonLink>
+            )}
+            {!pathname.includes('add') && (
+               <ButtonLink
+                  href={Routes.AddFormPage()}
+                  rightIcon={<Icon as={MdPlaylistAdd} />}
+               >
+                  ایجاد فرم
+               </ButtonLink>
+            )}
+            <Button
+               colorScheme='red'
+               rightIcon={<Icon as={MdExitToAppRtl} />}
+               onClick={handleLogout}
+            >
+               خروج
+            </Button>
          </Container>
       </Box>
    );

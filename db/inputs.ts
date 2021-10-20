@@ -4,42 +4,42 @@ export default [
    {
       title: 'متن',
       type: 'TEXT',
-      validations: ['MANDATORY', 'LENGTH'],
+      // validations: ['MANDATORY', 'LENGTH'],
    },
    {
       title: 'رمز',
       type: 'PASSWORD',
-      validations: ['MANDATORY', 'LENGTH'],
+      // validations: ['MANDATORY', 'LENGTH'],
    },
    {
       title: 'ایمیل',
       type: 'EMAIL',
-      validations: ['MANDATORY', 'LENGTH'],
+      // validations: ['MANDATORY', 'LENGTH'],
    },
    {
       title: 'ادرس وب',
       type: 'URL',
-      validations: ['MANDATORY', 'LENGTH'],
+      // validations: ['MANDATORY', 'LENGTH'],
    },
    {
       title: 'عدد',
       type: 'NUMBER',
-      validations: ['MANDATORY', 'RANGE'],
+      // validations: ['MANDATORY', 'RANGE'],
    },
    {
       title: 'انتخاب از بین گزینه ها',
       type: 'SELECT',
-      validations: [],
+      // validations: [],
    },
    {
       title: 'متن چند خظی',
       type: 'TEXTAREA',
-      validations: ['MANDATORY', 'LENGTH'],
+      // validations: ['MANDATORY', 'LENGTH'],
    },
    {
       title: 'سوییچ',
       type: 'SWITCH',
-      validations: [],
+      // validations: [],
    },
    // {
    //    title: 'چکباکس',

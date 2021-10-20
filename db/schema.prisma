@@ -76,14 +76,14 @@ model Form {
 // }
 
 model CustomInput {
-  id           String       @id @default(cuid()) @db.Char(25)
-  type         InputType    @default(TEXT)
-  label        String       @db.VarChar(50)
-  placeholder  String?      @db.VarChar(100)
+  id           String    @id @default(cuid()) @db.Char(25)
+  type         InputType @default(TEXT)
+  label        String    @db.VarChar(50)
+  placeholder  String?   @db.VarChar(100)
   defaultValue String?
-  wide         Boolean      @default(true)
-  options      String[]
-  validations  Validation[]
+  //   wide         Boolean      @default(true)
+  //   options      String[]
+  //   validations  Validation[]
 
   formId String @db.Char(25)
   form   Form   @relation(fields: [formId], references: [id])
@@ -92,10 +92,10 @@ model CustomInput {
 }
 
 model Input {
-  type        InputType    @id @default(TEXT)
-  title       String       @db.VarChar(50)
-  hasOptions  Boolean      @default(false)
-  validations Validation[]
+  type  InputType @id @default(TEXT)
+  title String    @db.VarChar(50)
+  //   hasOptions  Boolean      @default(false)
+  //   validations Validation[]
 }
 
 enum InputType {
@@ -104,15 +104,15 @@ enum InputType {
   EMAIL
   URL
   NUMBER
-  SELECT
-  CHECKBOX
-  RADIO
+  //   SELECT
+  //   CHECKBOX
+  //   RADIO
   TEXTAREA
-  SWITCH
+  //   SWITCH
 }
 
-enum Validation {
-  MANDATORY
-  LENGTH
-  RANGE
-}
+// enum Validation {
+//   MANDATORY
+//   LENGTH
+//   RANGE
+// }
