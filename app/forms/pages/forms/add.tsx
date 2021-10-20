@@ -1,16 +1,7 @@
 import { useRef } from 'react';
 import { Routes, useMutation, useRouter } from 'blitz';
-import {
-   Box,
-   Container,
-   Icon,
-   IconButton,
-   Text,
-   useToast,
-} from '@chakra-ui/react';
+import { Container, useToast } from '@chakra-ui/react';
 import { SubmitHandler } from 'react-hook-form';
-import { z } from 'zod';
-import { MdAdd } from 'react-icons/md';
 
 import { Page } from '~core/types';
 import {
@@ -18,16 +9,10 @@ import {
    FORM_ERROR,
    Header,
    HookForm,
-   Select,
    TextArea,
    TextField,
 } from '~/app/core/components';
-import {
-   formInputSchema,
-   formSchema,
-   FormSchema,
-   FormInputSchema,
-} from '../../validations';
+import { formSchema, FormSchema } from '../../validations';
 import createFormMutation from '../../mutations/createForm';
 import { AddField, Fields } from '../../components';
 
@@ -44,13 +29,18 @@ const AddFormPage: Page = () => {
    const fieldsRef = useRef<any>();
 
    const handleCreateForm: SubmitHandler<FormSchema> = async values => {
+      if (values.inputs.length === 0)
+         return {
+            [FORM_ERROR]: 'حداقل باید یک فرم ایجاد کنید.',
+         };
+
       try {
          await createForm(values);
 
          toast({
             title: 'فرم شما با موفقیت ایجاد شد.',
             status: 'success',
-            duration: 4000,
+            duration: 6000,
             isClosable: true,
          });
          router.push(Routes.FormsPage());
@@ -91,7 +81,6 @@ const AddFormPage: Page = () => {
 };
 
 AddFormPage.authenticate = true;
-AddFormPage.suppressFirstRenderFlicker = true;
-AddFormPage.title = 'فرم ها';
+AddFormPage.title = 'ایجاد فرم';
 
 export default AddFormPage;

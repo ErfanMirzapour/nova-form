@@ -10,18 +10,27 @@ export default resolver.pipe(
       if (!(await db.form.count({ where: { ownerId: session.userId } })))
          return;
 
-      return db.form.update({
+      const deleteInputs = db.customInput.deleteMany({
+         where: {
+            formId: id,
+            id: { notIn: inputs.map(({ id }) => id!).filter(Boolean) },
+         },
+      });
+
+      const updateForm = db.form.update({
          where: { id },
          data: {
             ...form,
             inputs: {
-               upsert: inputs.map(({ id, ...input }) => ({
-                  where: { id },
+               upsert: inputs.map(({ id: inputId, ...input }) => ({
+                  where: { id: inputId || '' },
                   update: { ...input },
                   create: input,
                })),
             },
          },
       });
+
+      return db.$transaction([deleteInputs, updateForm]);
    }
 );

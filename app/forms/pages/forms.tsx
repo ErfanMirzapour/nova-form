@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { useQuery } from 'blitz';
+import { Link, Routes, useQuery } from 'blitz';
 import {
    Alert,
    Center,
@@ -20,7 +20,7 @@ import { MdGridView, MdList } from 'react-icons/md';
 
 const Forms = () => {
    const [view, viewSet] = useLocalStorage('view', 'grid');
-   const [forms] = useQuery(getForms, undefined);
+   const [forms] = useQuery(getForms, { updatedAt: 'desc' });
 
    return (
       <>
@@ -65,11 +65,13 @@ const Forms = () => {
                      }}
                      h='full'
                   >
-                     <LinkOverlay href='#'>
-                        <Text fontWeight='bold' fontSize='3xl' mb='6'>
-                           {title}
-                        </Text>
-                     </LinkOverlay>
+                     <Link href={Routes.EditFormPage({ formId: id })} passHref>
+                        <LinkOverlay>
+                           <Text fontWeight='bold' fontSize='3xl' mb='6'>
+                              {title}
+                           </Text>
+                        </LinkOverlay>
+                     </Link>
                      <Text fontWeight='bold'>{description}</Text>
                   </Card>
                </LinkBox>

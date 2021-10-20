@@ -3,19 +3,25 @@ import { Box, CloseButton, Flex, Icon, Text, VStack } from '@chakra-ui/react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { MdAdd } from 'react-icons/md';
 
-import { Card, TextArea, TextField } from '~core/components';
-import { FormSchema } from '../validations';
+import { Card, FORM_ERROR, TextArea, TextField } from '~core/components';
+import { FormInputSchema, FormSchema } from '../validations';
 
 const Fields = forwardRef((_, ref) => {
    const { control } = useFormContext<FormSchema>();
-   const { fields, append, remove } = useFieldArray({
+   const { fields, append, remove } = useFieldArray<FormSchema['inputs']>({
       control,
       name: 'inputs',
       key: 'label',
    });
 
    useImperativeHandle(ref, () => ({
-      addField: field => append(field),
+      addField: (field: FormInputSchema) => {
+         if (fields.find(f => f.label === field.label))
+            return {
+               [FORM_ERROR]: 'فیلد تکراری',
+            };
+         append(field);
+      },
    }));
 
    if (fields.length === 0) return null;
